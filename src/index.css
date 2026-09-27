@@ -1,0 +1,31 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@custom-variant dark (&:where(.dark, .dark *));
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+}
+
+/* 고정 헤더에 가려지지 않도록 앵커 스크롤 여백 */
+.prose [id] {
+  scroll-margin-top: 5.5rem;
+}
+
+/* Tailwind typography가 인라인 코드 앞뒤에 붙이는 백틱 장식 제거 */
+.prose code::before,
+.prose code::after {
+  content: none;
+}
+
+/* 문서 본문 기본 폭 제한 해제 + 한글 줄바꿈 개선 */
+.prose {
+  max-width: none;
+  overflow-wrap: break-word;
+}
+.prose pre {
+  overflow-x: auto;
+}
