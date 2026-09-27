@@ -69,12 +69,12 @@ function distToSeg(px, py, ax, ay, bx, by) {
   return Math.hypot(px - (ax + t * dx), py - (ay + t * dy));
 }
 
-// 흰색 "M" 글리프 (정규화 좌표)
+// 흰색 "M" 글리프 — 더 두꺼운 획 + 더 넓은 여백
 const GLYPH = [
-  [[0.22, 0.7], [0.22, 0.3]],
-  [[0.22, 0.3], [0.5, 0.58]],
-  [[0.5, 0.58], [0.78, 0.3]],
-  [[0.78, 0.3], [0.78, 0.7]],
+  [[0.24, 0.72], [0.24, 0.28]],   // 왼쪽 세로획
+  [[0.24, 0.28], [0.5, 0.54]],    // 왼→중간 대각선
+  [[0.5, 0.54], [0.76, 0.28]],    // 중간→오른쪽 대각선
+  [[0.76, 0.28], [0.76, 0.72]],   // 오른쪽 세로획
 ];
 
 function draw(size, { maskable = false } = {}) {
@@ -82,7 +82,7 @@ function draw(size, { maskable = false } = {}) {
   const FG = [255, 255, 255];
   const px = Buffer.alloc(size * size * 4);
   const radius = size * 0.225;
-  const lw = size * 0.075;
+  const lw = size * 0.088; // 더 두꺼운 획
   for (let y = 0; y < size; y++) {
     for (let x = 0; x < size; x++) {
       const nx = (x + 0.5) / size;

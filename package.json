@@ -6,7 +6,7 @@
   "scripts": {
     "prepare-content": "node scripts/prepare.mjs",
     "dev": "vite",
-    "build": "node scripts/make-icons.mjs && tsc -b && vite build",
+    "build": "tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview --port 4173 --strictPort"
   },
