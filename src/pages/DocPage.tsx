@@ -9,14 +9,14 @@ function Breadcrumb({ slug }: { slug: string }) {
   const crumbs = useMemo(() => ancestorSlugs(slug), [slug]);
   if (crumbs.length <= 1) return null;
   return (
-    <nav aria-label="브레드크럼" className="mb-4 flex flex-wrap items-center gap-1 text-sm">
+    <nav aria-label="브레드크럼" className="mb-6 flex flex-wrap items-center gap-1.5 text-sm">
       {crumbs.map((c, i) => (
-        <span key={c} className="flex items-center gap-1">
-          {i > 0 && <span className="text-slate-400">/</span>}
+        <span key={c} className="flex items-center gap-1.5">
+          {i > 0 && <span className="text-slate-300 dark:text-slate-600">/</span>}
           {i === crumbs.length - 1 ? (
-            <span className="font-medium text-slate-900 dark:text-white">{pages[c]?.title}</span>
+            <span className="font-medium text-slate-600 dark:text-slate-300">{pages[c]?.title}</span>
           ) : (
-            <Link to={`/${c}`} className="text-slate-500 hover:text-indigo-600 dark:text-slate-400">
+            <Link to={`/${c}`} className="text-indigo-600 transition-colors hover:text-indigo-500 dark:text-indigo-400">
               {pages[c]?.title ?? c}
             </Link>
           )}
@@ -93,12 +93,12 @@ export function DocPage({ section }: { section: string }) {
   const origSlug = pages[slug]?.origSlug;
 
   return (
-    <article>
+    <article className="mx-auto max-w-4xl">
       <Breadcrumb slug={slug} />
-      <h1 className="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+      <h1 className="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
         {page.title}
       </h1>
-      <div className="mt-6">
+      <div className="mt-8 leading-relaxed">
         <DocMarkdown slug={slug} source={page.body} />
       </div>
       <footer className="mt-12 border-t border-slate-200 pt-6 text-sm text-slate-500 dark:border-slate-800 dark:text-slate-400">

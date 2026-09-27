@@ -31,35 +31,47 @@ function DocsLayout({ section }: { section: string }) {
       <aside className="sticky top-16 hidden h-[calc(100vh-4rem)] w-72 shrink-0 overflow-y-auto border-r border-slate-200 px-2 dark:border-slate-800 lg:block">
         <Sidebar tree={tree} currentSlug={currentSlug} ancestors={ancestors} />
       </aside>
-      <main className="min-w-0 flex-1 px-4 py-8 sm:px-6 lg:px-10">
+      <main className="min-w-0 flex-1 px-4 py-8 sm:px-6 lg:px-10 lg:py-10">
         <Outlet />
       </main>
 
-      {/* 모바일 목차 버튼 + 오버레이 */}
+      {/* 모바일 목차 버튼 (FAB) */}
       <button
         onClick={() => setMobileOpen(true)}
-        className="fixed bottom-6 right-6 z-40 rounded-full bg-indigo-600 px-5 py-3 text-sm font-bold text-white shadow-lg lg:hidden"
+        className="fixed bottom-8 right-6 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-indigo-600 text-white shadow-xl ring-4 ring-white transition-transform active:scale-95 dark:ring-slate-900 lg:hidden"
+        aria-label="목차 열기"
       >
-        목차
+        <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2.5">
+          <path d="M4 6h16M4 12h16m-7 6h7" strokeLinecap="round" />
+        </svg>
       </button>
+
+      {/* 모바일 사이드바 오버레이 (Bottom Sheet 스타일) */}
       {mobileOpen && (
         <div className="fixed inset-0 z-50 lg:hidden">
           <div
-            className="absolute inset-0 bg-black/40"
+            className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity"
             onClick={() => setMobileOpen(false)}
           />
-          <div className="absolute bottom-0 left-0 right-0 max-h-[75vh] overflow-y-auto rounded-t-2xl bg-white px-4 pb-8 dark:bg-slate-950">
-            <div className="sticky top-0 flex items-center justify-between bg-white py-3 dark:bg-slate-950">
-              <span className="font-bold text-slate-900 dark:text-white">목차</span>
+          <div className="absolute bottom-0 left-0 right-0 flex max-h-[85vh] flex-col rounded-t-[2rem] bg-white shadow-2xl transition-transform dark:bg-slate-950">
+            {/* 드래그 핸들 바 */}
+            <div className="mx-auto mt-3 h-1.5 w-12 rounded-full bg-slate-200 dark:bg-slate-800" />
+            
+            <div className="flex items-center justify-between px-6 py-4">
+              <span className="text-lg font-bold text-slate-900 dark:text-white">전체 목차</span>
               <button
                 onClick={() => setMobileOpen(false)}
-                aria-label="닫기"
-                className="rounded-lg p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800"
+                className="rounded-full bg-slate-100 p-2 text-slate-500 transition-colors hover:bg-slate-200 dark:bg-slate-900 dark:text-slate-400 dark:hover:bg-slate-800"
               >
-                ✕
+                <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M6 18L18 6M6 6l12 12" />
+                </svg>
               </button>
             </div>
-            <Sidebar tree={tree} currentSlug={currentSlug} ancestors={ancestors} />
+
+            <div className="flex-1 overflow-y-auto px-4 pb-12">
+              <Sidebar tree={tree} currentSlug={currentSlug} ancestors={ancestors} />
+            </div>
           </div>
         </div>
       )}
