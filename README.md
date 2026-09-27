@@ -6,7 +6,7 @@ React + TypeScript + Tailwind CSS 기반 PWA 문서 사이트입니다.
 ## 실행 방법
 
 ```bash
-cd ~/workspace/mdn-ko-pwa
+cd /git/ty-mdn
 npm install        # 최초 1회
 npm run dev        # 개발 서버 (http://localhost:5173)
 npm run build      # 프로덕션 빌드 -> dist/
@@ -14,8 +14,7 @@ npm run preview    # 빌드 결과 미리보기 (http://localhost:4173)
 ```
 
 > `npm run dev` / `npm run build` 실행 시 `scripts/prepare.mjs`가 자동으로
-> `../mdn-ko-prototype/docs` (읽기 전용)에서 정제된 마크다운을 `src/content`로 복사하고
-> `src/contentIndex.ts`(페이지 목록 + 사이드바 트리)를 생성합니다.
+> 마크다운 문서를 `src/content`로 복사하고 `src/contentIndex.ts`(페이지 목록 + 사이드바 트리)를 생성합니다.
 
 ## 주요 기능
 
